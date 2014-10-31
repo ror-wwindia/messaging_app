@@ -1,0 +1,33 @@
+<% if @messages.present? %>
+  <div class="page-header">
+    <h1>You have following messages in your Inbox!</h1>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= 'Sr No' %></th>
+        <th><%= 'Message From' %></th>
+        <th><%= 'Sent At' %></th>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @messages.each_with_index do |message, i| %>
+        <tr>
+          <td><%= (i + 1) %></td>
+          <td><%= message.name %></td>
+          <td><%= message.created_at.in_time_zone('Mumbai').strftime('%b %e, %l:%M %p') %></td>
+          <td>
+            <%= link_to 'View Message',
+                        message_path(message), :class => 'btn btn-mini' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+  <div class="page-header">
+    <h1>You have no messages</h1>
+  </div>
+<% end %>
